@@ -23,11 +23,15 @@ class Wall {
   }
 
   display() {
+    let xv = paddingLeft + (squareSize + spaceSize) * (this.position[0]) - spaceSize / 2;
+    let yv = paddingTop + (squareSize + spaceSize) * (this.position[1]) - spaceSize / 2;
+    let xh = paddingLeft + (squareSize + spaceSize) * (this.position[0]) - spaceSize / 2;
+    let yh = paddingTop + (squareSize + spaceSize) * (this.position[1]) - spaceSize / 2;
     noStroke();
     fill(this.color);
     rect(
-      this.orientation == 'v' ? paddingLeft + (squareSize + spaceSize) * (this.position[0]) - spaceSize / 2 : paddingLeft + (squareSize + spaceSize) * (this.position[0]) - spaceSize / 2,
-      this.orientation == 'v' ? paddingTop + (squareSize + spaceSize) * (this.position[1]) - spaceSize / 2 : paddingTop + (squareSize + spaceSize) * (this.position[1]) - spaceSize / 2,
+      this.orientation == 'v' ? xv : xh,
+      this.orientation == 'v' ? yv : yh,
       this.orientation == 'v' ? this.thickness : this.length,
       this.orientation == 'v' ? this.length : this.thickness
     );
@@ -459,8 +463,18 @@ function isIllegalWallPosition(i, j) {
 
 function wallPreview() {
   noStroke();
-  hover == 'intersection' ? fill('rgba(212, 127, 0, 0)') : fill('rgba(212, 127, 0, 1)');
+  rectMode(CORNER);
+  fill(canvasColor);
+  let fakeCoverX = paddingLeft + (squareSize + spaceSize) * (pawnActive.walls[pawnActive.wallsRem - 1].position[0]) - spaceSize;
+  let fakeCoverY = paddingTop + (squareSize + spaceSize) * (pawnActive.walls[pawnActive.wallsRem - 1].position[1] - 1);
+  rect(
+    fakeCoverX,
+    fakeCoverY,
+    spaceSize,
+    squareSize * 2 + spaceSize
+  );
   rectMode(CENTER);
+  hover == 'intersection' ? fill('rgba(212, 127, 0, 0)') : fill('rgba(212, 127, 0, 1)');
   rect(
     mouseX,
     mouseY,

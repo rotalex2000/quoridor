@@ -40,6 +40,10 @@ function draw() {
       placeWall();
     }
 
+    if (animation[0] && !playWithComputer) {
+      animatePawn();
+    }
+
     hoverOn();
 
     checkWin();

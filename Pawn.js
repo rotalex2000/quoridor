@@ -1,15 +1,12 @@
 let pawn1, pawn2;
 let caveStatus = "outside"; // can be outisde, inside or entrance
+let animation = [false, 'direction' /* h = 0, v = 1 */, 'destination', 'fakePawnPos'];
 
 class Pawn {
   constructor(i, j, color) {
     this.name;
     this.color = color;
     this.position = [i, j];
-    this.realPosition = [
-      paddingLeft + (squareSize + spaceSize) * (i - 1) + squareSize / 2,
-      paddingTop + (squareSize + spaceSize) * (j - 1) + squareSize / 2,
-    ];
     this.square = squares[((this.position[1] - 1) * boardLength) + this.position[0] - 1];
     // nearby squares references
     this.squareUp;
@@ -55,41 +52,69 @@ class Pawn {
     if (pawnActive == pawn1 || (pawnActive == pawn2 && !playWithComputer)) {
 
       if (mouseIsPressed && mouseButton == LEFT) {
+        animation[3] = [
+          paddingLeft + (squareSize + spaceSize) * (pawnActive.position[0] - 1) + squareSize / 2,
+          paddingTop + (squareSize + spaceSize) * (pawnActive.position[1] - 1) + squareSize / 2,
+        ];
         // up
         if (this.mouseCheckers[0][0] && this.squareUp && this.squareUp.isValidPosition) {
+          animation[1] = [0, -1];
+          animation[0] = true;
           this.setPosition(this.position[0], this.position[1] - 1);
           // 2 up
         } else if (this.mouseCheckers[0][1] && this.square2Up && this.square2Up.isValidPosition) {
+          animation[1] = [0, -2];
+          animation[0] = true;
           this.setPosition(this.position[0], this.position[1] - 2);
           // down
         } else if (this.mouseCheckers[1][0] && this.squareDown && this.squareDown.isValidPosition) {
+          animation[1] = [0, 1];
+          animation[0] = true;
           this.setPosition(this.position[0], this.position[1] + 1);
           // 2 down
         } else if (this.mouseCheckers[1][1] && this.square2Down && this.square2Down.isValidPosition) {
+          animation[1] = [0, 2];
+          animation[0] = true;
           this.setPosition(this.position[0], this.position[1] + 2);
           // left
         } else if (this.mouseCheckers[2][0] && this.squareLeft && this.squareLeft.isValidPosition) {
+          animation[1] = [-1, 0];
+          animation[0] = true;
           this.setPosition(this.position[0] - 1, this.position[1]);
           // 2 left
         } else if (this.mouseCheckers[2][1] && this.square2Left && this.square2Left.isValidPosition) {
+          animation[1] = [-2, 0];
+          animation[0] = true;
           this.setPosition(this.position[0] - 2, this.position[1]);
           // right
         } else if (this.mouseCheckers[3][0] && this.squareRight && this.squareRight.isValidPosition) {
+          animation[1] = [1, 0];
+          animation[0] = true;
           this.setPosition(this.position[0] + 1, this.position[1]);
           // 2 right
         } else if (this.mouseCheckers[3][1] && this.square2Right && this.square2Right.isValidPosition) {
+          animation[1] = [2, 0];
+          animation[0] = true;
           this.setPosition(this.position[0] + 2, this.position[1])
           // up - left
         } else if (this.mouseCheckers[0][2] && this.squareUpLeft && this.squareUpLeft.isValidPosition) {
+          animation[1] = [-1, -1];
+          animation[0] = true;
           this.setPosition(this.position[0] - 1, this.position[1] - 1);
           // up - right
         } else if (this.mouseCheckers[0][3] && this.squareUpRight && this.squareUpRight.isValidPosition) {
+          animation[1] = [1, -1];
+          animation[0] = true;
           this.setPosition(this.position[0] + 1, this.position[1] - 1);
           // down - left
         } else if (this.mouseCheckers[1][2] && this.squareDownLeft && this.squareDownLeft.isValidPosition) {
+          animation[1] = [-1, 1];
+          animation[0] = true;
           this.setPosition(this.position[0] - 1, this.position[1] + 1);
           // down - right
         } else if (this.mouseCheckers[1][3] && this.squareDownRight && this.squareDownRight.isValidPosition) {
+          animation[1] = [1, 1];
+          animation[0] = true;
           this.setPosition(this.position[0] + 1, this.position[1] + 1);
         }
         // reset all colors
@@ -469,5 +494,37 @@ class Pawn {
   displayValidPositions() {
     this.setValidPos();
     this.showValidPosHover();
+  }
+}
+
+function animatePawn() {
+  if (pawnActive == pawn1) {
+    pawn2.color = squareColor;
+    animation[2] = [
+      paddingLeft + (squareSize + spaceSize) * (pawn2.position[0] - 1) + squareSize / 2,
+      paddingTop + (squareSize + spaceSize) * (pawn2.position[1] - 1) + squareSize / 2,
+    ];
+  } else {
+    pawn1.color = squareColor;
+    animation[2] = [
+      paddingLeft + (squareSize + spaceSize) * (pawn1.position[0] - 1) + squareSize / 2,
+      paddingTop + (squareSize + spaceSize) * (pawn1.position[1] - 1) + squareSize / 2,
+    ];
+  }
+
+  if (animation[3][0] == animation[2][0] && animation[3][1] == animation[2][1]) {
+    animation[0] = false;
+    pawn2.color = pawn2Color;
+    pawn1.color = pawn1Color;
+  } else {
+    noStroke();
+    pawnActive == pawn1 ? fill(pawn2Color) : fill(pawn1Color);
+    circle(
+      animation[3][0],
+      animation[3][1],
+      pawnSize
+    );
+    animation[3][0] += animation[1][0] * 2;
+    animation[3][1] += animation[1][1] * 2;
   }
 }

@@ -50,6 +50,9 @@ function createP1NameInput() {
     p1NameInput.style('font-weight', 'bold');
 
     p1NameInput.position(pLabelHorizPos-size*1.65, p1LabelVertPos+size*0.3);
+
+    p1NameInput.mouseOver(buttonHoverOn);
+    p1NameInput.mouseOut(buttonHoverOut);
 }
 
 function createP2NameInput() {
@@ -65,6 +68,9 @@ function createP2NameInput() {
     p2NameInput.style('font-weight', 'bold');
 
     p2NameInput.position(pLabelHorizPos-size*1.65, p2LabelVertPos+size*0.3);
+    
+    p2NameInput.mouseOver(buttonHoverOn);
+    p2NameInput.mouseOut(buttonHoverOut);
 }
 
 function createPlayWithCCheckbox() {
