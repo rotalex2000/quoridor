@@ -457,3 +457,14 @@ function isIllegalWallPosition(i, j) {
   return isIllegal;
 }
 
+function wallPreview() {
+  noStroke();
+  hover == 'intersection' ? fill('rgba(212, 127, 0, 0)') : fill('rgba(212, 127, 0, 1)');
+  rectMode(CENTER);
+  rect(
+    mouseX,
+    mouseY,
+    orientationChoice == 'v' ? spaceSize : squareSize * 2 + spaceSize,
+    orientationChoice == 'v' ? squareSize * 2 + spaceSize : spaceSize
+  );
+}

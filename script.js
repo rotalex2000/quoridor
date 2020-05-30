@@ -35,6 +35,7 @@ function draw() {
     }
 
     if (action == 'placeWall' && orientationChoice != null) {
+      wallPreview();
       setNextWallCoords();
       placeWall();
     }

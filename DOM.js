@@ -30,7 +30,12 @@ function createPlayButton() {
     playButton.position(canvasWidth/2-size*1.3, canvasHeight/2);
 
     playButton.mousePressed(playGame);
+
+    playButton.mouseOver(buttonHoverOn);
+    playButton.mouseOut(buttonHoverOut);
 }
+
+
 
 function createP1NameInput() {
     p1NameInput = createInput();
@@ -63,9 +68,12 @@ function createP2NameInput() {
 }
 
 function createPlayWithCCheckbox() {
-    playWithCCheckbox = createCheckbox('Play with Computer', false);
+    playWithCCheckbox = createCheckbox(' Play with Computer', false);
 
-    playWithCCheckbox.position(pLabelHorizPos+size*2, p2LabelVertPos+size*0.3);
+    playWithCCheckbox.style('color', wallColor);
+    playWithCCheckbox.style('font-size', size*0.2 + 'px');
+
+    playWithCCheckbox.position(pLabelHorizPos+size*2, p2LabelVertPos+size*0.5);
 
     playWithCCheckbox.changed(playWithComputerToggle);
 }
@@ -85,6 +93,9 @@ function createStartButton() {
     startButton.position(pLabelHorizPos-size*1.05, p1LabelVertPos+size*2.7);
 
     startButton.mousePressed(startGame);
+
+    startButton.mouseOver(buttonHoverOn);
+    startButton.mouseOut(buttonHoverOut);
 }
 
 function createMovePawn1Button() {
@@ -101,6 +112,9 @@ function createMovePawn1Button() {
     movePawn1Button.position(info1XPos+size*0.15, infoYPos+size*0.84);
 
     movePawn1Button.mousePressed(setMovePawn);
+
+    movePawn1Button.mouseOver(buttonHoverOn);
+    movePawn1Button.mouseOut(buttonHoverOut);
 }
 
 function createMovePawn2Button() {
@@ -117,6 +131,9 @@ function createMovePawn2Button() {
     movePawn2Button.position(info2XPos-size*1.55, infoYPos+size*0.84);
 
     movePawn2Button.mousePressed(setMovePawn);
+
+    movePawn2Button.mouseOver(buttonHoverOn);
+    movePawn2Button.mouseOut(buttonHoverOut);
 }
 
 function createPlaceWall1Button() {
@@ -133,6 +150,9 @@ function createPlaceWall1Button() {
     placeWall1Button.position(info1XPos+size*0.15, infoYPos+size*1.39);
 
     placeWall1Button.mousePressed(setPlaceWall);
+
+    placeWall1Button.mouseOver(buttonHoverOn);
+    placeWall1Button.mouseOut(buttonHoverOut);
 }
 
 function createPlaceWall2Button() {
@@ -149,6 +169,9 @@ function createPlaceWall2Button() {
     placeWall2Button.position(info2XPos-size*1.55, infoYPos+size*1.39);
 
     placeWall2Button.mousePressed(setPlaceWall);
+
+    placeWall2Button.mouseOver(buttonHoverOn);
+    placeWall2Button.mouseOut(buttonHoverOut);
 }
 
 function createRestartButton() {
@@ -166,6 +189,9 @@ function createRestartButton() {
     restartButton.position(info1XPos, canvasHeight-size*0.8);
 
     restartButton.mousePressed(restartGame);
+
+    restartButton.mouseOver(buttonHoverOn);
+    restartButton.mouseOut(buttonHoverOut);
 }
 
 function createPlayAgainButton() {
@@ -184,6 +210,9 @@ function createPlayAgainButton() {
     playAgainButton.position(canvasWidth/2 - size, canvasHeight/2+ size/3);
 
     playAgainButton.mousePressed(startGame);
+
+    playAgainButton.mouseOver(buttonHoverOn);
+    playAgainButton.mouseOut(buttonHoverOut);
 }
 
 function enableButton(button) {
@@ -206,4 +235,12 @@ function enableInput(input) {
 function disableInput(input) {
     input.attribute('disabled', '');
     input.style('opacity', '0.7');
+}
+
+function buttonHoverOn() {
+    this.style('filter', 'brightness(120%)');
+}
+
+function buttonHoverOut() {
+    this.style('filter', 'brightness(100%)');
 }

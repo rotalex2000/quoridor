@@ -99,6 +99,24 @@ class Pawn {
       }
 
     } else { // calculator function to move pawn - easy mode
+      // let horizontalResults = this.checkHorizontalAccess(this.square);
+      // let caveResults = this.checkCave();
+      // if (caveResults[0]) {
+      //   if (caveResults[1].isValidPosition) {
+      //     this.setPosition(caveResults[1].mPosition[0], caveResults[1].mPosition[1]);
+      //     return;
+      //   }
+      // }
+      // if (this.square2Down && this.square2Down.isValidPosition) {
+      //   this.setPosition(this.square2Down.mPosition[0], this.square2Down.mPosition[1]);
+      // } else if (this.squareDown && this.squareDown.isValidPosition) {
+      //   this.setPosition(this.squareDown.mPosition[0], this.squareDown.mPosition[1]);
+      // } else if (horizontalResults[0]) {
+      //   this.setPosition(horizontalResults[1].mPosition[0], horizontalResults[1].mPosition[1]);
+      // } else {
+      //   this.setPosition(this.squareUp.mPosition[0], this.squareUp.mPosition[1]);
+      // }
+
       this.calculatorMove();
       // reset all colors
       for (let i = 0; i < squares.length; i++) {
