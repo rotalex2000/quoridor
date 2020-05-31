@@ -35,9 +35,12 @@ function draw() {
     }
 
     if (action == 'placeWall' && orientationChoice != null) {
+      cursor('grabbing');
       wallPreview();
       setNextWallCoords();
       placeWall();
+    } else {
+      cursor('auto');
     }
 
     if (animation[0] && !playWithComputer) {
