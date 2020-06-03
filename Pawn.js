@@ -514,8 +514,6 @@ function animatePawn() {
 
   if (animation[3][0] == animation[2][0] && animation[3][1] == animation[2][1]) {
     animation[0] = false;
-    pawn2.color = pawn2Color;
-    pawn1.color = pawn1Color;
   } else {
     noStroke();
     pawnActive == pawn1 ? fill(pawn2Color) : fill(pawn1Color);
@@ -526,5 +524,9 @@ function animatePawn() {
     );
     animation[3][0] += animation[1][0] * 2;
     animation[3][1] += animation[1][1] * 2;
+  }
+  if ((animation[3][0] == animation[2][0] && animation[3][1] == animation[2][1])) {
+    pawn2.color = pawn2Color;
+    pawn1.color = pawn1Color;
   }
 }

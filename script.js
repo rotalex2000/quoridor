@@ -36,7 +36,9 @@ function draw() {
 
     if (action == 'placeWall' && orientationChoice != null) {
       cursor('grabbing');
-      wallPreview();
+      if (!(playWithComputer && pawnActive == pawn2)) {
+        wallPreview();
+      }
       setNextWallCoords();
       placeWall();
     } else {
@@ -409,9 +411,11 @@ function keyPressed() {
 function checkWin() {
   if (pawn1.position[1] == 1) {
     winner = pawn1;
+    pawn1.color = pawn1Color;
     endGame();
   } else if (pawn2.position[1] == 9) {
     winner = pawn2;
+    pawn2.color = pawn2Color;
     endGame();
   }
 }
