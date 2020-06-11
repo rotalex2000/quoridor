@@ -61,16 +61,12 @@ function setNextWallCoords() {
   if (hover != 'intersection') {
     nextWallPosI = null;
     nextWallPosJ = null;
-  } else if (isValidWallPosition(nextWallPosI, nextWallPosJ)) {
-    fill(wallPreviewColor);
-    rect(
-      orientationChoice == 'v' ? paddingLeft + (squareSize + spaceSize) * (nextWallPosI) - spaceSize / 2 : paddingLeft + (squareSize + spaceSize) * (nextWallPosI) - spaceSize / 2,
-      orientationChoice == 'v' ? paddingTop + (squareSize + spaceSize) * (nextWallPosJ) - spaceSize / 2 : paddingTop + (squareSize + spaceSize) * (nextWallPosJ) - spaceSize / 2,
-      orientationChoice == 'v' ? spaceSize : squareSize * 2 + spaceSize,
-      orientationChoice == 'v' ? squareSize * 2 + spaceSize : spaceSize
-    );
   } else {
-    fill('#b80000');
+    if (isValidWallPosition(nextWallPosI, nextWallPosJ)) {
+      fill(wallPreviewColor);
+    } else {
+      fill('#c90000');
+    }
     rect(
       orientationChoice == 'v' ? paddingLeft + (squareSize + spaceSize) * (nextWallPosI) - spaceSize / 2 : paddingLeft + (squareSize + spaceSize) * (nextWallPosI) - spaceSize / 2,
       orientationChoice == 'v' ? paddingTop + (squareSize + spaceSize) * (nextWallPosJ) - spaceSize / 2 : paddingTop + (squareSize + spaceSize) * (nextWallPosJ) - spaceSize / 2,
